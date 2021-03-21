@@ -1,0 +1,113 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-menu-toggle></ion-menu-toggle>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form [formGroup]="form">
+    <div class="bgdark ion-padding ion-margin-bottom">
+      <ion-grid>
+        <ion-row class="ion-text-center">
+          <ion-col size="6">
+            <div class="faceframe">
+              <ion-img
+                class="reaction-image"
+                src="assets/reactions/actions_0.svg"
+              ></ion-img>
+            </div>
+          </ion-col>
+          <ion-col size="6" color="light">
+            <p class="ion-no-margin">حسب رأيي</p>
+
+            <h1 class="ion-no-margin" color="primary">غالي جدآ</h1>
+            <p class="ion-no-margin">المصنعية 5دينار 🔥</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-button class="bgdarkbutton" color="primary">
+        <ion-text color="light">
+          <ion-icon name="diamond-outline"></ion-icon>
+          المزيد
+        </ion-text>
+      </ion-button>
+    </div>
+
+    <div class="ion-padding-horizontal">
+      <mat-form-field appearance="fill" class="w-50">
+        <mat-label>الوزن </mat-label>
+        <input type="number" matInput formControlName="weight" />
+        <span matSuffix>قرام</span>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="w-50 ion-padding-start">
+        <mat-label> سعر البيع</mat-label>
+        <input type="number" matInput formControlName="price" />
+      </mat-form-field>
+
+      <p class="ion-text-center">
+        <mat-form-field appearance="fill" class="w-50">
+          <mat-label>القيراط</mat-label>
+          <mat-select formControlName="carat">
+            <mat-option *ngFor="let pure of pureList" [value]="pure">
+              {{pure}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field
+          floatLabel="always"
+          appearance="fill"
+          class="w-50 ion-padding-start"
+        >
+          <mat-label>قيمة الذهب عالميا</mat-label>
+          <input
+            type="number"
+            matInput
+            value="19.5"
+            formControlName="marketـprice"
+          />
+          <mat-icon matSuffix>
+            <ion-img src="assets/icon/globe-africa-solid.svg"></ion-img>
+          </mat-icon>
+        </mat-form-field>
+      </p>
+    </div>
+    <mat-expansion-panel class="mat-elevation-z">
+      <mat-expansion-panel-header>
+        <mat-panel-title> تحكم اكثر </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <p>
+        <mat-form-field appearance="fill" class="w-25">
+          <mat-label>الضريبة</mat-label>
+          <input type="number" matInput formControlName="vat" />
+          <span matSuffix>%</span>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-75 ion-padding-start">
+          <mat-label>العملة</mat-label>
+          <mat-select formControlName="currency">
+            <mat-option
+              *ngFor="let currency of currencyList"
+              [value]="currency.key"
+            >
+              {{currency.label}} ({{currency.key}})
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </p>
+    </mat-expansion-panel>
+
+    <pre>
+      {{form.value | json}}
+
+
+
+    </pre>
+  </form>
+</ion-content>
