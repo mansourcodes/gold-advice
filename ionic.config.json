@@ -1,5 +1,7 @@
 {
   "name": "goldcal",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
