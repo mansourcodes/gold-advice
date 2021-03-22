@@ -1,8 +1,8 @@
 {
   "name": "goldcal",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "author": "Mansour Alnasser ",
+  "homepage": "https://twitter.com/_mansourcodes_",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -23,8 +23,10 @@
     "@angular/platform-browser-dynamic": "~11.2.0",
     "@angular/router": "~11.2.0",
     "@ionic-native/native-storage": "^5.31.1",
+    "@ionic-native/status-bar": "^5.31.1",
     "@ionic/angular": "^5.5.2",
     "@ionic/storage": "^2.3.1",
+    "ionic-native": "^2.9.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
@@ -40,6 +42,14 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
+    "cordova": "^10.0.0",
+    "cordova-android": "^9.0.0",
+    "cordova-plugin-device": "2.0.2",
+    "cordova-plugin-ionic-keyboard": "^2.0.5",
+    "cordova-plugin-ionic-webview": "^4.0.0",
+    "cordova-plugin-splashscreen": "5.0.2",
+    "cordova-plugin-statusbar": "2.4.2",
+    "cordova-plugin-whitelist": "^1.3.3",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~5.2.0",
@@ -56,7 +66,18 @@
   "description": "An Ionic project",
   "cordova": {
     "plugins": {
-      "cordova-plugin-nativestorage": {}
-    }
+      "cordova-plugin-nativestorage": {},
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-device": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-ionic-webview": {
+        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
+      },
+      "cordova-plugin-ionic-keyboard": {}
+    },
+    "platforms": [
+      "android"
+    ]
   }
 }

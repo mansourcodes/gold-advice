@@ -26,9 +26,12 @@
             <p class="ion-no-margin">حسب رأيي</p>
 
             <h1 class="ion-no-margin" color="primary">{{advice?.label}}</h1>
-            <p class="ion-no-margin">
-              المصنعية {{workmanshipPrice | number:'0.1-3'}}
+            <p *ngIf="workmanshipPrice > 0" class="ion-no-margin">
+              لأن المصنعية {{workmanshipPrice | number:'0.1-3'}}
               {{currentCurrency.label}}
+            </p>
+            <p *ngIf="workmanshipPrice <= 0" class="ion-no-margin">
+              لأن المصنعية تحت الصفر
             </p>
           </ion-col>
         </ion-row>
@@ -67,7 +70,7 @@
           appearance="fill"
           class="w-50 ion-padding-start"
         >
-          <mat-label>سعر الذهب</mat-label>
+          <mat-label>سعر الذهب قيراط 24</mat-label>
           <input
             type="number"
             matInput
@@ -77,6 +80,11 @@
           <mat-icon matSuffix>
             <ion-img src="assets/icon/globe-africa-solid.svg"></ion-img>
           </mat-icon>
+          <mat-hint>
+            <a (click)="searchMarketPriceStringUrl()" href="#">
+              سعر الذهب في السوق قيراط 24
+            </a>
+          </mat-hint>
         </mat-form-field>
       </p>
     </div>
@@ -129,12 +137,14 @@
         </ion-item>
       </ion-list>
 
-      <h2 *ngIf="form.value['soundON']" (click)="toggleSoundOn()">
-        <ion-icon name="volume-medium-outline"></ion-icon>
-      </h2>
-      <h2 *ngIf="!form.value['soundON']" (click)="toggleSoundOn()">
-        <ion-icon name="volume-mute-outline"></ion-icon>
-      </h2>
+      <div class="ion-text-center">
+        <div *ngIf="form.value['soundON']" (click)="toggleSoundOn()">
+          <ion-icon size="large" name="volume-medium-outline"></ion-icon>
+        </div>
+        <div *ngIf="!form.value['soundON']" (click)="toggleSoundOn()">
+          <ion-icon size="large" name="volume-mute-outline"></ion-icon>
+        </div>
+      </div>
     </mat-expansion-panel>
   </form>
 </ion-content>

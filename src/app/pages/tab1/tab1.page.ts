@@ -24,8 +24,8 @@ export class Tab1Page implements OnInit {
       weight: new FormControl(100, [Validators.required]),
       price: new FormControl(1000),
       carat: new FormControl(24),
-      marketـprice: new FormControl(10),
-      vat: new FormControl(0),
+      marketـprice: new FormControl(20),
+      vat: new FormControl(5),
       currency: new FormControl('BHD'),
       soundON: new FormControl(true),
     });
@@ -34,6 +34,7 @@ export class Tab1Page implements OnInit {
       .then(
         data => {
           this.form.patchValue(data);
+          this.updateAdvice();
         },
         error => console.error(error)
       );
@@ -56,18 +57,19 @@ export class Tab1Page implements OnInit {
   workmanshipPrice: number = 0;
   benefitPersantage: number = 0;
   adviceList = [
+    { range: 0, key: 0, label: 'هناك خطاء' },
     { range: 5, key: 4, label: 'استثمار ناجح' },
     { range: 7, key: 3, label: 'اشتري حالا' },
     { range: 10, key: 2, label: 'جدا ممتاز' },
     { range: 15, key: 1, label: 'البائع جيد' },
-    { range: 20, key: 0, label: 'السعر مقبول' },
+    { range: 20, key: 0, label: 'السعر تمام' },
     { range: 25, key: -1, label: 'يمشي السعر' },
     { range: 30, key: -2, label: 'يقدر يخفضك' },
     { range: 35, key: -3, label: 'خفضني اكثر' },
     { range: 40, key: -4, label: 'لا توو ماج' },
-    { range: 45, key: -5, label: 'غاليي جدا' },
+    { range: 200, key: -5, label: 'غاليي جدا' },
   ];
-  advice: any;
+  advice: any = { range: 20, key: 0, label: 'لا اعلم' };
   currentCurrency = { key: 'SAR', label: 'ريال السعودي' };
 
   updateAdvice() {
@@ -94,22 +96,30 @@ export class Tab1Page implements OnInit {
     if (this.advice == undefined) {
       this.advice = { range: 20, key: 0, label: 'لا اعلم' };
     }
+    if (this.benefitPersantage > 200) {
+      this.advice = { range: 200, key: -5, label: 'هناك مشكلة' };
+    }
 
     this.playAudio();
 
-    console.log(this.form.value);
+    setTimeout(() => {
 
-    this.storage.set('fromValues', this.form.value)
-      .then(
-        () => console.log('Stored item!'),
-        error => console.error('Error storing item', error)
-      );
+      this.storage.set('fromValues', this.form.value)
+        .then(
+          () => console.log('Stored item!'),
+          error => console.error('Error storing item', error)
+        );
+
+    }, 1000);
+
+
 
   }
 
   playAudio() {
     if (this.form.get('soundON').value) {
       let audio = new Audio();
+      audio.volume = 0.05;
       // audio.src = "../../../assets/sounds/coinflip.wav";
       audio.src = "../../../assets/sounds/retrocoin.wav";
       audio.load();
@@ -128,6 +138,21 @@ export class Tab1Page implements OnInit {
       this.form.patchValue({ soundON: true });
 
     }
+  }
+
+
+  searchMarketPriceStringUrl() {
+    const currencyKey = this.form.get('currency').value ?? 'BHD';
+    this.currentCurrency = this.currencyList.find(x => x.key == currencyKey);
+
+    console.log(this.currentCurrency);
+
+    let href = "https://www.google.com/search?q=سعر+الذهب+" + this.currentCurrency.label.replace(' ', '+') + "+قيراط+٢٤";
+
+    console.log(href);
+
+
+    return '';
   }
 
 }
