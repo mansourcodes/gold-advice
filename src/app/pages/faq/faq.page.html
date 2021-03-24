@@ -1,0 +1,73 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="tab1"
+        icon="arrow-forward-outline"
+      ></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="bgdark ion-padding">
+    <ion-grid class="ion-padding-vertical ion-margin-vertical">
+      <ion-row class="ion-text-center">
+        <ion-col size="6">
+          <h1 class="ion-padding">مرحبا 😇</h1>
+          <p class="ion-padding">
+            ممكن عندكم بعض الأسئلة، حطينا إجاباتها إهني 👇
+          </p>
+        </ion-col>
+        <ion-col size="6">
+          <div class="faceframe">
+            <ion-img
+              class="reaction-image"
+              [src]="'assets/reactions/actions_2.svg'"
+            ></ion-img>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <mat-expansion-panel class="mat-elevation-z" *ngFor="let faq of faqlist">
+    <mat-expansion-panel-header>
+      <mat-panel-title> {{faq.title}} </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <p *ngIf="faq?.body" class="ion-padding">{{faq.body}}</p>
+
+    <p *ngIf="faq?.key == 1" class="ion-padding">
+      <ion-button (click)="closeApp()"> عص اهني </ion-button>
+    </p>
+
+    <p *ngIf="faq?.key == 2" class="ion-text-center">
+      <ion-button
+        color="tertiary"
+        fill="outline"
+        (click)="openUrl('https://www.instagram.com/_mansourcodes_/')"
+      >
+        <ion-icon name="logo-instagram"></ion-icon>
+      </ion-button>
+      <ion-button
+        color="tertiary"
+        fill="outline"
+        (click)="openUrl('https://twitter.com/_mansourcodes_')"
+      >
+        <ion-icon name="logo-twitter"></ion-icon>
+      </ion-button>
+      <ion-button
+        color="tertiary"
+        fill="outline"
+        (click)="openUrl('https://github.com/mansourcodes')"
+      >
+        <ion-icon name="logo-github"></ion-icon>
+      </ion-button>
+    </p>
+  </mat-expansion-panel>
+
+  <p class="ion-text-center ion-padding">الإصدار {{version}}</p>
+  <p class="ion-padding"></p>
+  <p class="ion-padding"></p>
+</ion-content>

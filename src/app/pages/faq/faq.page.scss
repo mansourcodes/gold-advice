@@ -1,0 +1,28 @@
+app-faq {
+  .mat-expansion-panel {
+    border-radius: 0 !important;
+    margin-bottom: 2px !important;
+  }
+
+  .mat-expansion-panel-header,
+  .mat-expansion-panel-header:hover,
+  .mat-expansion-panel-header.mat-expanded:focus,
+  .mat-expansion-panel-header.mat-expanded {
+    background-color: var(--ion-color-tertiary, #2f3b55) !important;
+    color: var(--ion-color-tertiary-contrast, #f9fafc);
+    border-radius: 0 !important;
+  }
+  .mat-expansion-panel-header-description,
+  .mat-expansion-indicator::after,
+  .mat-expansion-panel-header-title {
+    color: var(--ion-color-tertiary-contrast, #f9fafc);
+  }
+
+  .mat-expansion-panel {
+    color: var(--ion-color-tertiary, #2f3b55) !important;
+  }
+}
+
+.bgdark {
+  margin-bottom: 2px;
+}

@@ -1,10 +1,13 @@
 <ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar color="tertiary">
-    <ion-buttons slot="start">
+    <!-- <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
-    </ion-buttons>
+    </ion-buttons> -->
     <ion-buttons slot="end">
-      <!-- <ion-menu-toggle></ion-menu-toggle> -->
+      <ion-button>
+        المساعدة
+        <ion-icon name="logo-youtube" class="ion-padding-start"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -12,7 +15,7 @@
 <ion-content [fullscreen]="true">
   <form [formGroup]="form">
     <div class="bgdark ion-padding ion-margin-bottom">
-      <ion-grid>
+      <ion-grid class="ion-padding-vertical">
         <ion-row class="ion-text-center">
           <ion-col size="6">
             <div class="faceframe">
@@ -27,49 +30,44 @@
 
             <h1 class="ion-no-margin" color="primary">{{advice?.label}}</h1>
             <p *ngIf="workmanshipPrice > 0" class="ion-no-margin">
-              لأن المصنعية {{workmanshipPrice | number:'0.1-3'}}
+              لأن المصنعية {{workmanshipPrice | number:decimal()}}
               {{currentCurrency.label}}
             </p>
             <p *ngIf="workmanshipPrice <= 0" class="ion-no-margin">
               لأن المصنعية تحت الصفر
             </p>
+            <p class="ion-no-margin">{{advice?.action}}</p>
           </ion-col>
         </ion-row>
       </ion-grid>
-      <ion-button class="bgdarkbutton" color="primary">
+      <ion-button class="bgdarkbutton" color="primary" routerLink="/faq">
         <ion-text color="light">
           <ion-icon name="diamond-outline"></ion-icon>
           المزيد
         </ion-text>
       </ion-button>
+      <ion-button class="resetFormButton" color="light" (click)="resetForm()">
+        <ion-icon size="large" name="refresh-circle-outline"></ion-icon>
+      </ion-button>
     </div>
 
-    <div class="ion-padding-horizontal">
+    <div class="ion-padding-horizontal ion-margin-bottom">
       <mat-form-field appearance="fill" class="w-50">
         <mat-label>الوزن </mat-label>
         <input type="number" matInput formControlName="weight" />
         <span matSuffix>قرام</span>
       </mat-form-field>
       <mat-form-field appearance="fill" class="w-50 ion-padding-start">
-        <mat-label> سعر البيع</mat-label>
+        <mat-label> سعر البيع (شامل الضريبة)</mat-label>
         <input type="number" matInput formControlName="price" />
+
+        <mat-icon matSuffix>
+          <ion-icon name="cash-outline"></ion-icon>
+        </mat-icon>
       </mat-form-field>
 
-      <p class="ion-text-center">
-        <mat-form-field appearance="fill" class="w-50">
-          <mat-label>القيراط</mat-label>
-          <mat-select formControlName="carat">
-            <mat-option *ngFor="let pure of pureList" [value]="pure">
-              {{pure}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field
-          floatLabel="always"
-          appearance="fill"
-          class="w-50 ion-padding-start"
-        >
+      <p class="ion-text-center ion-padding-bottom">
+        <mat-form-field floatLabel="always" appearance="fill" class="w-40">
           <mat-label>سعر الذهب قيراط 24</mat-label>
           <input
             type="number"
@@ -78,18 +76,33 @@
             formControlName="marketـprice"
           />
           <mat-icon matSuffix>
-            <ion-img src="assets/icon/globe-africa-solid.svg"></ion-img>
+            <ion-icon name="globe-outline"></ion-icon>
           </mat-icon>
           <mat-hint>
             <a (click)="searchMarketPriceStringUrl()" href="#">
+              <ion-icon name="exit-outline"></ion-icon>
               سعر الذهب في السوق قيراط 24
             </a>
           </mat-hint>
         </mat-form-field>
+        <mat-form-field appearance="fill" class="w-30 ion-padding-start">
+          <mat-label>القيراط</mat-label>
+          <mat-select formControlName="carat">
+            <mat-option *ngFor="let pure of pureList" [value]="pure">
+              {{pure}}
+            </mat-option>
+          </mat-select>
+          <mat-hint> نوع قيراط الصوغة </mat-hint>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="w-30 ion-padding-start">
+          <mat-label>سعر القيراط {{form.value['carat']}} </mat-label>
+          <input matInput [value]="caratGlobalPrice" />
+          <mat-hint> لكل الغرام </mat-hint>
+        </mat-form-field>
       </p>
     </div>
 
-    <mat-expansion-panel class="mat-elevation-z">
+    <mat-expansion-panel class="mat-elevation-z ion-margin-top">
       <mat-expansion-panel-header>
         <mat-panel-title> تحكم اكثر </mat-panel-title>
       </mat-expansion-panel-header>
@@ -117,27 +130,27 @@
       <ion-list>
         <ion-item lines="full">
           <ion-label> نسبة الفائدة للبائع </ion-label>
-          {{benefitPersantage | number:'0.1-1'}} ٪
+          {{benefitPersantage | number:'0.0-2'}} ٪
         </ion-item>
         <ion-item lines="full">
           <ion-label> المصنعية </ion-label>
-          {{workmanshipPrice | number:'0.1-3'}}
+          {{workmanshipPrice | number:decimal()}}
         </ion-item>
         <ion-item lines="full">
           <ion-label> سعر بيع القرام </ion-label>
-          {{priceOfOneGram | number:'0.1-3'}}
+          {{priceOfOneGram | number:decimal()}}
         </ion-item>
         <ion-item lines="full">
           <ion-label> السعر بدون ضريبة </ion-label>
-          {{priceWithoutVAT | number:'0.1-3'}}
+          {{priceWithoutVAT | number:decimal()}}
         </ion-item>
         <ion-item lines="full">
           <ion-label> نسبة الذهب في القيراط {{form.value['carat']}} </ion-label>
-          {{carat_persentage*100 | number:'0.1-2'}} ٪
+          {{carat_persentage*100 | number:'0.0-3'}} ٪
         </ion-item>
       </ion-list>
 
-      <div class="ion-text-center">
+      <div class="ion-text-center ion-padding">
         <div *ngIf="form.value['soundON']" (click)="toggleSoundOn()">
           <ion-icon size="large" name="volume-medium-outline"></ion-icon>
         </div>
@@ -146,5 +159,64 @@
         </div>
       </div>
     </mat-expansion-panel>
+
+    <ion-card
+      *ngIf="page_is_loaded && !(form.value['welcome_card_hide'] || form.value['welcome_card_hide_forever'])"
+      class="welcome-card"
+    >
+      <ion-img src="assets/welcome.svg"></ion-img>
+
+      <ion-card-header>
+        <ion-card-title>مرحبآ 👋</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p class="ion-text-justify">
+          شكرا جزيلا لوصولك إلى هنا!👏 أتمنى ان يكون التطبيق مفيد لكم. عند
+          إستفادتك لا تنسى أن تخبر أصدقائك 😁
+        </p>
+        <p class="ion-text-center">
+          <ion-button
+            color="tertiary"
+            fill="outline"
+            (click)="openUrl('https://www.instagram.com/_mansourcodes_/')"
+          >
+            <ion-icon name="logo-instagram"></ion-icon>
+          </ion-button>
+          <ion-button
+            color="tertiary"
+            fill="outline"
+            (click)="openUrl('https://twitter.com/_mansourcodes_')"
+          >
+            <ion-icon name="logo-twitter"></ion-icon>
+          </ion-button>
+          <ion-button
+            color="tertiary"
+            fill="outline"
+            (click)="openUrl('https://github.com/mansourcodes')"
+          >
+            <ion-icon name="logo-github"></ion-icon>
+          </ion-button>
+        </p>
+      </ion-card-content>
+
+      <ion-item lines="full">
+        <ion-label>لا تظهر هذه الرسالة لاحقآ.</ion-label>
+        <ion-checkbox
+          slot="start"
+          formControlName="welcome_card_checkbox"
+        ></ion-checkbox>
+        <ion-button slot="end" color="tertiary" (click)="hideWelcomeCard()">
+          إغلاق
+        </ion-button>
+      </ion-item>
+      <!-- <div class="ion-text-end ion-padding">
+      <ion-button color="tertiary"> إغلاق </ion-button>
+    </div> -->
+    </ion-card>
+
+    <ion-backdrop
+      (click)="hideWelcomeCard()"
+      *ngIf="page_is_loaded &&  !(form.value['welcome_card_hide'] || form.value['welcome_card_hide_forever'])"
+    ></ion-backdrop>
   </form>
 </ion-content>
