@@ -1,0 +1,60 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="tab1"
+        icon="arrow-forward-outline"
+      ></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="bgdark ion-padding-vertical">
+    <ion-grid class="ion-padding-vertical">
+      <ion-row class="ion-text-center">
+        <ion-col size="6">
+          <h1 class="ion-padding">
+            المساعدة
+            <br />
+            🔍
+          </h1>
+          <p class="ion-padding">جمعنا لكم بعض الفيديوهات المفيدة</p>
+        </ion-col>
+        <ion-col size="6">
+          <div class="faceframe">
+            <ion-img
+              class="reaction-image"
+              [src]="'assets/reactions/actions_1.svg'"
+            ></ion-img>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <div class="ion-padding">
+    <ion-list>
+      <ion-item
+        lines="none"
+        class="card video-shadow"
+        *ngFor="let item of youtubeUrlsArray"
+      >
+        <div class="video-container">
+          <h3>{{item.title}}</h3>
+          <iframe
+            width="500px"
+            height="315"
+            [src]="item.trustedUrl"
+            frameborder="0"
+            allowfullscreen
+            webkitallowfullscreen
+            mozallowfullscreen
+          ></iframe>
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
+  <p class="ion-padding"></p>
+  <p class="ion-padding"></p>
+</ion-content>

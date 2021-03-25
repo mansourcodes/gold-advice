@@ -14,6 +14,10 @@ const routes: Routes = [
     path: 'faq',
     loadChildren: () => import('./pages/faq/faq.module').then(m => m.FaqPageModule)
   },
+  {
+    path: 'help',
+    loadChildren: () => import('./pages/help/help.module').then( m => m.HelpPageModule)
+  },
   // {
   //   path: '',
   //   loadChildren: () => import('./pages/tabs/tabs.module').then(m => m.TabsPageModule)

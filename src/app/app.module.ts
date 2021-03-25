@@ -12,10 +12,9 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { HelpPipe } from './pages/help.pipe';
 
 @NgModule({
-  declarations: [AppComponent, HelpPipe],
+  declarations: [AppComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
