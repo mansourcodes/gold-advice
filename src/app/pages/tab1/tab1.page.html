@@ -36,7 +36,14 @@
             <p *ngIf="workmanshipPrice <= 0" class="ion-no-margin">
               لأن المصنعية تحت الصفر
             </p>
-            <p class="ion-no-margin">{{advice?.action}}</p>
+            <ion-button
+              size="small"
+              *ngIf="workmanshipPrice > 0"
+              fill="outline"
+              color="light"
+            >
+              {{advice?.action}}
+            </ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -62,7 +69,7 @@
         <input type="number" matInput formControlName="price" />
 
         <mat-icon matSuffix>
-          <ion-icon name="cash-outline"></ion-icon>
+          <ion-icon color="tertiary" name="cash-outline"></ion-icon>
         </mat-icon>
       </mat-form-field>
 
@@ -76,7 +83,7 @@
             formControlName="marketـprice"
           />
           <mat-icon matSuffix>
-            <ion-icon name="globe-outline"></ion-icon>
+            <ion-icon color="tertiary" name="globe-outline"></ion-icon>
           </mat-icon>
           <mat-hint>
             <a (click)="searchMarketPriceStringUrl()" href="#">
@@ -109,7 +116,7 @@
 
       <p>
         <mat-form-field appearance="fill" class="w-25">
-          <mat-label>الضريبة</mat-label>
+          <mat-label>الضريبة VAT</mat-label>
           <input type="number" matInput formControlName="vat" />
           <span matSuffix>%</span>
         </mat-form-field>
@@ -152,10 +159,18 @@
 
       <div class="ion-text-center ion-padding">
         <div *ngIf="form.value['soundON']" (click)="toggleSoundOn()">
-          <ion-icon size="large" name="volume-medium-outline"></ion-icon>
+          <ion-icon
+            color="tertiary"
+            size="large"
+            name="volume-medium-outline"
+          ></ion-icon>
         </div>
         <div *ngIf="!form.value['soundON']" (click)="toggleSoundOn()">
-          <ion-icon size="large" name="volume-mute-outline"></ion-icon>
+          <ion-icon
+            color="tertiary"
+            size="large"
+            name="volume-mute-outline"
+          ></ion-icon>
         </div>
       </div>
     </mat-expansion-panel>
@@ -171,8 +186,8 @@
       </ion-card-header>
       <ion-card-content>
         <p class="ion-text-justify">
-          شكرا جزيلا لوصولك إلى هنا!👏 أتمنى ان يكون التطبيق مفيد لكم. عند
-          إستفادتك لا تنسى أن تخبر أصدقائك 😁
+          شكرا جزيلا لوصولك إلى هنا!👏 اتمنى أن يكون التطبيق مفيد لكم. عند
+          استفادتك لا تنسى أن تخبر أصدقائك 😁
         </p>
         <p class="ion-text-center">
           <ion-button

@@ -86,17 +86,23 @@ export class Tab1Page implements OnInit {
   workmanshipPrice: number = 0;
   benefitPersantage: number = 0;
   adviceList = [
-    { range: 0, key: 0, label: 'هناك خطاء', action: '' },
+    { range: 0, key: 0, label: 'هناك خطأ', action: '' },
     { range: 5, key: 4, label: 'استثمار ناجح', action: 'نوصي بالشراء' },
     { range: 7, key: 3, label: 'اشتري حالا', action: 'نوصي بالشراء' },
     { range: 10, key: 2, label: 'جدا ممتاز', action: 'نوصي بالشراء' },
     { range: 15, key: 1, label: 'البائع جيد', action: 'نوصي بالشراء' },
     { range: 20, key: 1, label: 'السعر ممتاز ', action: 'نوصي بالشراء' },
-    { range: 25, key: -1, label: 'يمشي السعر', action: 'نوصي بالشراء/طلب تخفيض' },
+    { range: 25, key: -1, label: 'السعر زين', action: 'نوصي بالشراء/طلب تخفيض' },
+    { range: 27, key: -1, label: 'يمشي السعر', action: 'نوصي بالشراء/طلب تخفيض' },
     { range: 30, key: -2, label: 'يقدر يخفضك', action: 'نوصي بالشراء/طلب تخفيض' },
     { range: 35, key: -3, label: 'خفضني اكثر', action: 'نوصي بطلب تخفيض' },
-    { range: 40, key: -4, label: 'لا توو ماج', action: 'نوصي بطلب تخفيض' },
-    { range: 200, key: -5, label: 'غاليي جدا', action: 'نوصي بالخروج من المحل' },
+    { range: 40, key: -3, label: 'ما يصلح', action: 'نوصي بطلب تخفيض' },
+    { range: 50, key: -2, label: 'تمزح؟', action: 'نوصي بطلب تخفيض' },
+    { range: 60, key: -4, label: 'لا تمزح!', action: 'نوصي بطلب تخفيض' },
+    { range: 70, key: -4, label: 'غالي', action: 'نوصي بطلب تخفيض' },
+    { range: 80, key: -5, label: 'غالي جدا', action: 'نوصي بطلب تخفيض' },
+    { range: 100, key: -5, label: 'تبا، غالي واجد', action: 'نوصي بالخروج من المحل' },
+    { range: 999999999999, key: -5, label: 'لا تعليق', action: 'نوصي بالخروج من المحل' },
   ];
   advice: any = { range: 20, key: 0, label: 'لا اعلم' };
   currentCurrency = { key: 'BHD', label: 'دينار بحريني', decimal: 3 };
@@ -126,9 +132,7 @@ export class Tab1Page implements OnInit {
     if (this.advice == undefined) {
       this.advice = { range: 20, key: 0, label: 'لا اعلم', action: 'تأكد من الارقام' };
     }
-    if (this.benefitPersantage > 200) {
-      this.advice = { range: 200, key: -5, label: 'غاليي جدا', action: 'نوصي بالخروج من المحل' };
-    }
+
 
     this.playAudio();
 
